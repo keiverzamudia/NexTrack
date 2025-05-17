@@ -11,8 +11,12 @@
 
     <title>Dashboard NexTrack</title>
 
-    <!-- Custom styles for this template-->
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
     <?php echo $varHeader;?>
+
     <style>
         html,
         body {
@@ -57,7 +61,7 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="index.php?url=usuario">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Panel</span></a>
@@ -86,11 +90,11 @@
                 </div>
             </li>
 
-            <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item ">
+            <!-- Nav Item - Gestion de Usuario -->
+            <li class="nav-item active">
                 <a class="nav-link" href="index.php?url=gestionUsuario">
                     <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Gestion de Usuario</span></a>
+                    <span>Gestion de Usuarios</span></a>
             </li>
 
             <!-- Divider -->
@@ -105,8 +109,20 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-folder"></i>
-                    <span>Gestion de Mensajes</span>
+                    <span>Pages</span>
                 </a>
+                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Login Screens:</h6>
+                        <a class="collapse-item" href="login.html">Login</a>
+                        <a class="collapse-item" href="register.html">Register</a>
+                        <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
+                        <div class="collapse-divider"></div>
+                        <h6 class="collapse-header">Other Pages:</h6>
+                        <a class="collapse-item" href="404.html">404 Page</a>
+                        <a class="collapse-item" href="blank.html">Blank Page</a>
+                    </div>
+                </div>
             </li>
 
             <!-- Nav Item - Charts -->
@@ -131,12 +147,6 @@
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
 
-            <!-- Sidebar Message 
-            <div class="sidebar-card d-none d-lg-flex">
-                <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="...">
-                <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
-                <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
-            </div>-->
 
         </ul>
         <!-- End of Sidebar -->
@@ -155,6 +165,7 @@
                         <i class="fa fa-bars"></i>
                     </button>
 
+                    <!-- Topbar Search -->
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -175,11 +186,11 @@
                                             </button>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
-                        </li>
+                                    </form>
+                                </div>
+                            </li>
 
-                        <!-- Nav Item - Alerts -->
+                            <!-- Nav Item - Alerts -->
                         <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bell fa-fw"></i>
@@ -221,7 +232,7 @@
                                     </div>
                                     <div>
                                         <div class="small text-gray-500">December 2, 2019</div>
-                                        Recuerden Cargar la Baterias de los Intercom
+                                        Recuerden Cargar la Baterias de los Intercomqowdnqwndoqnwdoinqwoidn
                                     </div>
                                 </a>
                                 <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
@@ -320,282 +331,247 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Panel Central</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Generar Reporte</a>
+                        <h1 class="h3 mb-0 text-gray-800">Gestion de Usuarios</h1>
                     </div>
 
+                    <?php if(isset($_SESSION['mensaje'])): ?>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <?php 
+                            echo $_SESSION['mensaje'];
+                            unset($_SESSION['mensaje']);
+                            ?>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    <?php endif; ?>
+
+                    <?php if(isset($_SESSION['error'])): ?>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <?php 
+                            echo $_SESSION['error'];
+                            unset($_SESSION['error']);
+                            ?>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    <?php endif; ?>
+
                     <!-- Content Row -->
-                    <div class="row">
-
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-primary shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Enviar un mensaje global</div>
-                                            <a href="buttons.php" style="font-weight: bold; color: #5a5c69; font-size: 20px;">Enviar un Mensaje Global</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-success shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Enviar mensaje personal</div>
-                                            <a href="cards.html" style="font-weight: bold; color: #5a5c69; font-size: 20px;">Enviar un Mensaje Privado</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="row" >
 
                         <!-- Earnings (Monthly) Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-info shadow h-100 py-2">
-                                <div class="card-body">
+                                <div class="card-body p-0">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Asigna un Activo
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1 text-center">Registar un Nuevo Usuario
                                             </div>
                                             <div class="row no-gutters align-items-center">
-                                                <a href="buttons.php" class="btn btn-primary btn-icon-split">
+                                                <button type="button" class="btn btn-primary btn-icon-split w-100" data-toggle="modal" data-target="#registrarModal">
                                                     <span class="icon text-white-50">
-                                                        <i class="fas fa-check"></i>
+                                                        <i class="fas fa-user-plus"></i>
                                                     </span>
-                                                    <span class="text">Asignar Activo</span>
-                                                </a>
+                                                    <span class="text">Registar Nuevo Usuario</span>
+                                                </button>
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        </div>
 
-                        <!-- Pending Requests Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-warning shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                Activos asignados a Usuario</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                    <!-- Modal de Registro -->
+                    <div class="modal fade" id="registrarModal" tabindex="-1" role="dialog" aria-labelledby="registrarModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="registrarModalLabel">Registrar Nuevo Usuario</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <form action="index.php?url=gestionUsuario&action=registrar" method="POST">
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label for="nombre">Nombre</label>
+                                            <input type="text" class="form-control" id="nombre" name="nombre" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="apellido">Apellido</label>
+                                            <input type="text" class="form-control" id="apellido" name="apellido" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="cedula">Cédula</label>
+                                            <input type="text" class="form-control" id="cedula" name="cedula" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="email">Correo Electrónico</label>
+                                            <input type="email" class="form-control" id="email" name="email" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="password">Contraseña</label>
+                                            <input type="password" class="form-control" id="password" name="password" required>
                                         </div>
                                     </div>
-                                </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-primary">Registrar Usuario</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Content Row -->
-
-                    <div class="row">
-
-                        <!-- Area Chart -->
-                        <div class="col-xl-8 col-lg-7">
-                            <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
-                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Vista de mensajes Recibidos</h6>
-                                </div>
-                                <!-- Card Body -->
-                                <div class="card-body">
-                                    <div class="row">
-                                        <!-- Mensajes Globales -->
-                                        <div class="col-md-6">
-                                            <h6 class="font-weight-bold text-primary">Mensajes Globales</h6>
-                                            <div class="list-group">
-                                                <a href="#" class="list-group-item list-group-item-action">
-                                                    <div class="d-flex w-100 justify-content-between">
-                                                        <div class="mr-3">
-                                                            <div class="icon-circle bg-primary">
-                                                                <i class="fas fa-file-alt text-white"></i>
-                                                            </div>
-                                                        </div>
-                                                        <div class="flex-grow-1">
-                                                            <h6 class="mb-1">Recuerden Formatear las Memorias</h6>
-                                                            <small class="text-muted">December 12, 2019</small>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                                <a href="#" class="list-group-item list-group-item-action">
-                                                    <div class="d-flex w-100 justify-content-between">
-                                                        <div class="mr-3">
-                                                            <div class="icon-circle bg-success">
-                                                                <i class="fas fa-donate text-white"></i>
-                                                            </div>
-                                                        </div>
-                                                        <div class="flex-grow-1">
-                                                            <h6 class="mb-1">Recuerden Cargar las Baterias de las Camaras</h6>
-                                                            <small class="text-muted">December 7, 2019</small>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                                <a href="#" class="list-group-item list-group-item-action">
-                                                    <div class="d-flex w-100 justify-content-between">
-                                                        <div class="mr-3">
-                                                            <div class="icon-circle bg-warning">
-                                                                <i class="fas fa-exclamation-triangle text-white"></i>
-                                                            </div>
-                                                        </div>
-                                                        <div class="flex-grow-1">
-                                                            <h6 class="mb-1">Recuerden Cargar la Baterias de los Intercom</h6>
-                                                            <small class="text-muted">December 2, 2019</small>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-
-                                        <!-- Centro de Mensajes -->
-                                        <div class="col-md-6">
-                                            <h6 class="font-weight-bold text-primary">Centro de Mensajes</h6>
-                                            <div class="list-group">
-                                                <a href="#" class="list-group-item list-group-item-action">
-                                                    <div class="d-flex w-100 justify-content-between">
-                                                        <div class="mr-3">
-                                                            <img class="rounded-circle" src="assets/img/cardenales.png" alt="..." style="width: 40px; height: 40px;">
-                                                            <div class="status-indicator bg-success"></div>
-                                                        </div>
-                                                        <div class="flex-grow-1">
-                                                            <h6 class="mb-1">Hi there! I am wondering if you can help me with a problem I've been having.</h6>
-                                                            <small class="text-muted">Emily Fowler · 58m</small>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                                <a href="#" class="list-group-item list-group-item-action">
-                                                    <div class="d-flex w-100 justify-content-between">
-                                                        <div class="mr-3">
-                                                            <img class="rounded-circle" src="assets/img/cardenales.png" alt="..." style="width: 40px; height: 40px;">
-                                                            <div class="status-indicator"></div>
-                                                        </div>
-                                                        <div class="flex-grow-1">
-                                                            <h6 class="mb-1">I have the photos that you ordered last month, how would you like them sent to you?</h6>
-                                                            <small class="text-muted">Jae Chun · 1d</small>
-                                                        </div>
-                                                    </div>
-                                            </div>
-                                            </a class="flex-grow-1">
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Lista de Usuarios</h6>
                         </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Nombre</th>
+                                            <th>Cédula</th>
+                                            <th>Correo</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php if(isset($usuarios) && is_array($usuarios)): ?>
+                                            <?php foreach($usuarios as $usuario): ?>
+                                                <tr>
+                                                    <td><?php echo htmlspecialchars($usuario['nombre'] . ' ' . $usuario['apellido']); ?></td>
+                                                    <td><?php echo htmlspecialchars($usuario['cedula']); ?></td>
+                                                    <td><?php echo htmlspecialchars($usuario['email']); ?></td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editModal<?php echo $usuario['id']; ?>">
+                                                            <i class="fas fa-edit"></i> Modificar
+                                                        </button>
+                                                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal<?php echo $usuario['id']; ?>">
+                                                            <i class="fas fa-trash"></i> Eliminar
+                                                        </button>
+                                                    </td>
+                                                </tr>
 
-                        <!-- Pie Chart -->
-                        <div class="col-xl-4 col-lg-5">
-                            <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
-                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Porcentaje Total de Articulos</h6>
-                                    <div class="dropdown no-arrow">
-                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                                            <div class="dropdown-header">Dropdown Header:</div>
-                                            <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Something else here</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Card Body -->
-                                <div class="card-body">
-                                    <div class="chart-pie pt-4 pb-2">
-                                        <canvas id="myPieChart"></canvas>
-                                    </div>
-                                    <div class="mt-4 text-center small">
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-primary"></i> Asignados
-                                        </span>
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-success"></i> Sin Asignar
-                                        </span>
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-info"></i> En Mantenimiento
-                                        </span>
-                                    </div>
-                                </div>
+                                                <!-- Modal de Modificación -->
+                                                <div class="modal fade" id="editModal<?php echo $usuario['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="editModalLabel<?php echo $usuario['id']; ?>" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="editModalLabel<?php echo $usuario['id']; ?>">Modificar Usuario</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <form action="index.php?url=gestionUsuario&action=modificar" method="POST">
+                                                                <div class="modal-body">
+                                                                    <input type="hidden" name="id" value="<?php echo $usuario['id']; ?>">
+                                                                    <div class="form-group">
+                                                                        <label for="nombre<?php echo $usuario['id']; ?>">Nombre</label>
+                                                                        <input type="text" class="form-control" id="nombre<?php echo $usuario['id']; ?>" name="nombre" value="<?php echo htmlspecialchars($usuario['nombre']); ?>" required>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="apellido<?php echo $usuario['id']; ?>">Apellido</label>
+                                                                        <input type="text" class="form-control" id="apellido<?php echo $usuario['id']; ?>" name="apellido" value="<?php echo htmlspecialchars($usuario['apellido']); ?>" required>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="cedula<?php echo $usuario['id']; ?>">Cédula</label>
+                                                                        <input type="text" class="form-control" id="cedula<?php echo $usuario['id']; ?>" name="cedula" value="<?php echo htmlspecialchars($usuario['cedula']); ?>" required>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="email<?php echo $usuario['id']; ?>">Correo Electrónico</label>
+                                                                        <input type="email" class="form-control" id="email<?php echo $usuario['id']; ?>" name="email" value="<?php echo htmlspecialchars($usuario['email']); ?>" required>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Modal de Eliminación -->
+                                                <div class="modal fade" id="deleteModal<?php echo $usuario['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel<?php echo $usuario['id']; ?>" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="deleteModalLabel<?php echo $usuario['id']; ?>">Confirmar Eliminación</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                ¿Está seguro que desea eliminar al usuario <?php echo htmlspecialchars($usuario['nombre'] . ' ' . $usuario['apellido']); ?>?
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                                <a href="index.php?url=gestionUsuario&action=eliminar&id=<?php echo $usuario['id']; ?>" class="btn btn-danger">Eliminar</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <?php endforeach; ?>
+                                        <?php endif; ?>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
-
-                    <!-- Content Row -->
-                    <div class="row">
-
-                        <!-- Content Column -->
-                        <div class="col-lg-6 mb-4">
-
-                            <!-- Project Card Example -->
-
-
-                            <!-- Color System -->
-
-
-                            <!-- Illustrations -->
-
-
-                            <!-- Approach -->
-
-                            <!-- /.container-fluid -->
-
-                        </div>
-                        <!-- End of Main Content -->
-
-                        <!-- Footer -->
-                    </div>
-                    <footer class="sticky-footer bg-white">
-                        <div class="container my-auto">
-                            <div class="copyright text-center my-auto">
-                                <span>Copyright &copy; NexTrack 2025</span>
-                            </div>
-                        </div>
-                    </footer>
-                    <!-- End of Footer -->
 
                 </div>
-                <!-- End of Content Wrapper -->
-
-                <!-- End of Page Wrapper -->
-
-                <!-- Scroll to Top Button-->
-                <a class="scroll-to-top rounded" href="#page-top">
-                    <i class="fas fa-angle-up"></i>
-                </a>
-
-                <!-- Logout Modal-->
-                <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">¿Listo para salir?</h5>
-                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">×</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">Seleccione "Salir" si desea cerrar su sesión actual.</div>
-                            <div class="modal-footer">
-                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                                <a class="btn btn-primary" href="index.php?url=usuario&action=cerrar-sesion">Salir</a>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
-                <?php echo $varJs;?>
+
+                <!-- Footer -->
+                <footer class="sticky-footer bg-white">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span>Copyright &copy; NexTrack 2025</span>
+                        </div>
+                    </div>
+                </footer>
+                <!-- End of Footer -->
+
+            </div>
+            <!-- End of Content Wrapper -->
+
+        </div>
+        <!-- End of Page Wrapper -->
+
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+
+        <!-- Logout Modal-->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Listo para salir?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Seleciones "Salir" si lo que quiere es Cerrar Sesion.</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <a class="btn btn-primary" href="index.php?url=usuario&action=cerrar-sesion">Salir</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bootstrap core JavaScript-->
+    <?php echo $varJs;?>
 
 </body>
 

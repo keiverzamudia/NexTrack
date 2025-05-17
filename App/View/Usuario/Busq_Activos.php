@@ -15,8 +15,7 @@
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
-    <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <?php echo $varHeader;?>
 
     <style>
         html,
@@ -51,9 +50,9 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php?url=usuario">
                 <div class="sidebar-brand-icon">
-                    <img src="img/cardenales.png" alt="Cardenales Logo" style="width: 40px; height: auto;">
+                    <img src="assets/img/cardenales.png" alt="Cardenales Logo" style="width: 40px; height: auto;">
                 </div>
                 <div class="sidebar-brand-text mx-3">NexTrack</div>
             </a>
@@ -63,7 +62,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="index.php?url=usuario">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Panel</span></a>
             </li>
@@ -93,7 +92,7 @@
 
             <!-- Nav Item - Gestion de Usuario -->
             <li class="nav-item active">
-                <a class="nav-link" href="Gestion_User.php">
+                <a class="nav-link" href="index.php?url=gestionUsuario">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Gestion de Usuarios</span></a>
             </li>
@@ -148,12 +147,6 @@
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
 
-            <!-- Sidebar Message -->
-            <div class="sidebar-card d-none d-lg-flex">
-                <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="...">
-                <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
-                <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
-            </div>
 
         </ul>
         <!-- End of Sidebar -->
@@ -173,16 +166,6 @@
                     </button>
 
                     <!-- Topbar Search -->
-                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -203,11 +186,11 @@
                                             </button>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
-                        </li>
+                                    </form>
+                                </div>
+                            </li>
 
-                        <!-- Nav Item - Alerts -->
+                            <!-- Nav Item - Alerts -->
                         <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bell fa-fw"></i>
@@ -249,7 +232,7 @@
                                     </div>
                                     <div>
                                         <div class="small text-gray-500">December 2, 2019</div>
-                                        Recuerden Cargar la Baterias de los Intercom
+                                        Recuerden Cargar la Baterias de los Intercomqowdnqwndoqnwdoinqwoidn
                                     </div>
                                 </a>
                                 <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
@@ -317,8 +300,8 @@
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Julio Rodriguez</span>
-                                <img class="img-profile rounded-circle" src="img/cardenales.png">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo htmlspecialchars($usuario['nombre'] . ' ' . $usuario['apellido']); ?></span>
+                                <img class="img-profile rounded-circle" src="assets/img/cardenales.png">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -351,140 +334,242 @@
                         <h1 class="h3 mb-0 text-gray-800">Gestion de Usuarios</h1>
                     </div>
 
+                    <?php if(isset($_SESSION['mensaje'])): ?>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <?php 
+                            echo $_SESSION['mensaje'];
+                            unset($_SESSION['mensaje']);
+                            ?>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    <?php endif; ?>
+
+                    <?php if(isset($_SESSION['error'])): ?>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <?php 
+                            echo $_SESSION['error'];
+                            unset($_SESSION['error']);
+                            ?>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    <?php endif; ?>
+
                     <!-- Content Row -->
                     <div class="row" >
 
                         <!-- Earnings (Monthly) Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-info shadow h-100 py-2">
-                                <div class="card-body">
+                                <div class="card-body p-0">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1 text-center">Registar un Nuevo Usuario
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1 text-center">Registar un Nuevo Activo
                                             </div>
                                             <div class="row no-gutters align-items-center">
-                                                <a href="buttons.php" class="btn btn-primary btn-icon-split">
+                                                <button type="button" class="btn btn-primary btn-icon-split w-100" data-toggle="modal" data-target="#registrarModal">
                                                     <span class="icon text-white-50">
-                                                        <i class="fas fa-check"></i>
+                                                        <i class="fas fa-user-plus"></i>
                                                     </span>
-                                                    <span class="text">Registar Nuevo Usuario</span>
-                                                </a>
+                                                    <span class="text">Registar Nuevo Activo</span>
+                                                </button>
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-info shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1 text-center">Modifica un Usuario Existente
-                                            </div>
-                                            <div class="row no-gutters align-items-center">
-                                                <a href="buttons.php" class="btn btn-primary btn-icon-split">
-                                                    <span class="icon text-white-50">
-                                                        <i class="fas fa-check"></i>
-                                                    </span>
-                                                    <span class="text">Modificar Usuario Existente</span>
-                                                </a>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
                         </div>
 
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-3">
-                            <div class="card border-left-info shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1 text-center">Elimina un Usuario Existente
-                                            </div>
-                                            <div class="row no-gutters align-items-center">
-                                                <a href="buttons.php" class="btn btn-primary btn-icon-split">
-                                                    <span class="icon text-white-50">
-                                                        <i class="fas fa-check"></i>
-                                                    </span>
-                                                    <span class="text">Eliminar Usuario Existente</span>
-                                                </a>
-                                            </div>
+                    <!-- Modal de Registro -->
+                    <div class="modal fade" id="registrarModal" tabindex="-1" role="dialog" aria-labelledby="registrarModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="registrarModalLabel">Registrar Nuevo Activo</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <form action="index.php?url=gestionUsuario&action=registrar" method="POST">
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label for="nombre">Nombre</label>
+                                            <input type="text" class="form-control" id="nombre" name="nombre" required>
                                         </div>
-
+                                        <div class="form-group">
+                                            <label for="apellido">Características</label>
+                                            <input type="text" class="form-control" id="caracteristica" name="caracteristica" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="cedula">Estatus</label>
+                                            <input type="text" class="form-control" id="estatus" name="estatus" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="email">Asignado a:</label>
+                                            <input type="email" class="form-control" id="asignado" name="asignado" required>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Pending Requests Card Example -->
-
-
-                    <!-- Content Row -->
-
-                    
-                </div>
-                        <!-- Footer -->
-                        <footer class="sticky-footer bg-white">
-                            <div class="container my-auto">
-                                <div class="copyright text-center my-auto">
-                                    <span>Copyright &copy; NexTrack 2025</span>
-                                </div>
-                            </div>
-                        </footer>
-                        <!-- End of Footer -->
-
-                    </div>
-                    <!-- End of Content Wrapper -->
-
-                <!-- End of Page Wrapper -->
-
-                <!-- Scroll to Top Button-->
-                <a class="scroll-to-top rounded" href="#page-top">
-                    <i class="fas fa-angle-up"></i>
-                </a>
-
-                <!-- Logout Modal-->
-                <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Listo para salir?</h5>
-                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                            </div>
-                            <div class="modal-body">Seleciones "Salir" si lo que quiere es Cerrar Sesion.</div>
-                            <div class="modal-footer">
-                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                                <a class="btn btn-primary" href="login.html">Salir</a>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-primary">Registrar Activos</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
+
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Lista de Activos</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Codigo</th>
+                                            <th>Nombre</th>
+                                            <th>Características</th>
+                                            <th>Estatus</th>
+                                            <th>Asignado a:</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php if(isset($usuarios) && is_array($usuarios)): ?>
+                                            <?php foreach($usuarios as $usuario): ?>
+                                                <tr>
+                                                    <td><?php echo htmlspecialchars($usuario['nombre'] . ' ' . $usuario['apellido']); ?></td>
+                                                    <td><?php echo htmlspecialchars($usuario['cedula']); ?></td>
+                                                    <td><?php echo htmlspecialchars($usuario['email']); ?></td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editModal<?php echo $usuario['id']; ?>">
+                                                            <i class="fas fa-edit"></i> Modificar
+                                                        </button>
+                                                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal<?php echo $usuario['id']; ?>">
+                                                            <i class="fas fa-trash"></i> Eliminar
+                                                        </button>
+                                                    </td>
+                                                </tr>
+
+                                                <!-- Modal de Modificación -->
+                                                <div class="modal fade" id="editModal<?php echo $usuario['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="editModalLabel<?php echo $usuario['id']; ?>" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="editModalLabel<?php echo $usuario['id']; ?>">Modificar Usuario</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <form action="index.php?url=gestionUsuario&action=modificar" method="POST">
+                                                                <div class="modal-body">
+                                                                    <input type="hidden" name="id" value="<?php echo $usuario['id']; ?>">
+                                                                    <div class="form-group">
+                                                                        <label for="nombre<?php echo $usuario['id']; ?>">Nombre</label>
+                                                                        <input type="text" class="form-control" id="nombre<?php echo $usuario['id']; ?>" name="nombre" value="<?php echo htmlspecialchars($usuario['nombre']); ?>" required>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="apellido<?php echo $usuario['id']; ?>">Apellido</label>
+                                                                        <input type="text" class="form-control" id="apellido<?php echo $usuario['id']; ?>" name="apellido" value="<?php echo htmlspecialchars($usuario['apellido']); ?>" required>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="cedula<?php echo $usuario['id']; ?>">Cédula</label>
+                                                                        <input type="text" class="form-control" id="cedula<?php echo $usuario['id']; ?>" name="cedula" value="<?php echo htmlspecialchars($usuario['cedula']); ?>" required>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="email<?php echo $usuario['id']; ?>">Correo Electrónico</label>
+                                                                        <input type="email" class="form-control" id="email<?php echo $usuario['id']; ?>" name="email" value="<?php echo htmlspecialchars($usuario['email']); ?>" required>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Modal de Eliminación -->
+                                                <div class="modal fade" id="deleteModal<?php echo $usuario['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel<?php echo $usuario['id']; ?>" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="deleteModalLabel<?php echo $usuario['id']; ?>">Confirmar Eliminación</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                ¿Está seguro que desea eliminar al usuario <?php echo htmlspecialchars($usuario['nombre'] . ' ' . $usuario['apellido']); ?>?
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                                <a href="index.php?url=gestionUsuario&action=eliminar&id=<?php echo $usuario['id']; ?>" class="btn btn-danger">Eliminar</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <?php endforeach; ?>
+                                        <?php endif; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
                 </div>
 
-                <!-- Bootstrap core JavaScript-->
-                <script src="vendor/jquery/jquery.min.js"></script>
-                <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-                <!-- Core plugin JavaScript-->
-                <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+                <!-- Footer -->
+                <footer class="sticky-footer bg-white">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span>Copyright &copy; NexTrack 2025</span>
+                        </div>
+                    </div>
+                </footer>
+                <!-- End of Footer -->
 
-                <!-- Custom scripts for all pages-->
-                <script src="js/sb-admin-2.min.js"></script>
+            </div>
+            <!-- End of Content Wrapper -->
 
-                <!-- Page level plugins -->
-                <script src="vendor/chart.js/Chart.min.js"></script>
+        </div>
+        <!-- End of Page Wrapper -->
 
-                <!-- Page level custom scripts -->
-                <script src="js/demo/chart-area-demo.js"></script>
-                <script src="js/demo/chart-pie-demo.js"></script>
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+
+        <!-- Logout Modal-->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Listo para salir?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Seleciones "Salir" si lo que quiere es Cerrar Sesion.</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <a class="btn btn-primary" href="index.php?url=usuario&action=cerrar-sesion">Salir</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bootstrap core JavaScript-->
+    <?php echo $varJs;?>
 
 </body>
 

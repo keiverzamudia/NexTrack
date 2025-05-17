@@ -46,6 +46,7 @@ class UsuarioController {
             // Hacer las variables accesibles en la vista
             $varHeader = $this->varHeader;
             $varJs = $this->varJs;
+            $usuario = $this->usuario; // Pasar la información del usuario a la vista
             require_once("app/View/Usuario/PerfilView.php");
         } else {
             header("Location: index.php?url=login");

@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Login</title>
+    <title>Login - NexTrack</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -56,7 +56,15 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Bienvenido!</h1>
                                     </div>
-                                    <form class="user" method="POST">
+                                    <?php if(isset($_SESSION['error'])): ?>
+                                        <div class="alert alert-danger">
+                                            <?php 
+                                            echo $_SESSION['error'];
+                                            unset($_SESSION['error']);
+                                            ?>
+                                        </div>
+                                    <?php endif; ?>
+                                    <form class="user" action="index.php?url=login&action=login" method="POST">
                                         <div class="form-group">
                                             <input type="email" class="form-control form-control-user"
                                                 id="email" name="email" aria-describedby="emailHelp"
@@ -70,8 +78,7 @@
                                             </span>
                                         </div>
                                         <button type="submit" class="btn btn-primary btn-user btn-block">Ingresar</button>
-                                        <p style="color: red;"><?php echo (isset($respuesta))? $respuesta : " ";?></p>
-
+                                    </form>
                                 </div>
                             </div>
                         </div>
