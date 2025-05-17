@@ -1,0 +1,14 @@
+{
+    "name": "zamudia/proyecto",
+    "autoload": {
+        "psr-4": {
+            "Zamudia\\Proyecto\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Zamudia"
+        }
+    ],
+    "require": {}
+}
